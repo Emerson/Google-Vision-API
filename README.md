@@ -37,4 +37,17 @@ You need to [setup your account](https://console.cloud.google.com/apis), enable 
 
 ### Usage
 
-`node index.js http://website.com/some-image.jpg`
+* `node index.js http://website.com/some-image.jpg`
+* `node index.js http://website.com/some-image.jpg TEXT_DETECTION`
+
+### Valid Detection Types
+
+```
+LABEL_DETECTION
+TEXT_DETECTION
+FACE_DETECTION
+LANDMARK_DETECTION
+LOGO_DETECTION
+SAFE_SEARCH_DETECTION
+IMAGE_PROPERTIES
+```

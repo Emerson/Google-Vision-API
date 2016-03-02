@@ -11,7 +11,21 @@ var options = {
   }
 }
 
-function requestData(fileData) {
+
+/*
+LABEL_DETECTION
+TEXT_DETECTION
+FACE_DETECTION
+LANDMARK_DETECTION
+LOGO_DETECTION
+SAFE_SEARCH_DETECTION
+IMAGE_PROPERTIES
+*/
+
+function requestData(fileData, detectionType) {
+  if(!detectionType) {
+    detectionType = 'LABEL_DETECTION'
+  }
   return {
       requests: [{
         image:{
@@ -19,7 +33,7 @@ function requestData(fileData) {
         },
         features:[
           {
-            type: "LABEL_DETECTION",
+            type: detectionType,
             maxResults: 5
           }
         ]
@@ -34,14 +48,14 @@ function downloadImage(url, cb) {
   })
 }
 
-function visionRequest(url, cb) {
+function visionRequest(url, detectionType, cb) {
   downloadImage(url, function(err, base64Image) {
     console.log('Image downloaded')
     if(err) {
       console.log(err)
       return
     }
-    request.post({url: options.url, body: JSON.stringify(requestData(base64Image))}, function(err, res) {
+    request.post({url: options.url, body: JSON.stringify(requestData(base64Image, detectionType))}, function(err, res) {
       if(err) {
         console.log(err)
         return
